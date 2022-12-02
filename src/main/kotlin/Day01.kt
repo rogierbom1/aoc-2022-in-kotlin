@@ -1,3 +1,7 @@
+package main.kotlin
+
+import readInput
+
 data class Snack(var calories: Int)
 data class Elf(var snacks: List<Snack>)
 
