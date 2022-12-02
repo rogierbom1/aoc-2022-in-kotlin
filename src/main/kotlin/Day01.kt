@@ -1,7 +1,7 @@
-data class FoodItem(var calories: Int)
-data class Elf(var food: List<FoodItem>)
+data class Snack(var calories: Int)
+data class Elf(var snacks: List<Snack>)
 
-private fun Elf.totalCalories() = food.sumOf { it.calories }
+private fun Elf.totalCalories() = snacks.sumOf { it.calories }
 
 private fun List<String>.toElves(): List<Elf> = this.flatMapIndexed { index, calories ->
     when {
@@ -13,24 +13,23 @@ private fun List<String>.toElves(): List<Elf> = this.flatMapIndexed { index, cal
     this.slice(from..to)
 }.map { stringList ->
     Elf(
-        food = stringList.map { stringValue ->
-            FoodItem(stringValue.toInt())
+        snacks = stringList.map { stringValue ->
+            Snack(stringValue.toInt())
         }
     )
 }
 
 fun main() {
-    fun part1(input: List<String>): Int = input.toElves().maxOf {
-            it.totalCalories()
+    fun part1(input: List<String>): Int = input.toElves().maxOf { elf ->
+            elf.totalCalories()
         }
 
     fun part2(input: List<String>): Int = input.toElves().sortedByDescending { elf ->
             elf.totalCalories()
-        }.take(3).sumOf {
-            it.totalCalories()
+        }.take(3).sumOf { elf ->
+            elf.totalCalories()
         }
 
-    // test if implementation meets criteria from the description, like:
     val testInput = readInput("Day01_test")
     check(part1(testInput) == 24000)
     check(part2(testInput) == 45000)
