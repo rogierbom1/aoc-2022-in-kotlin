@@ -17,7 +17,7 @@ fun main() {
         }
 
     fun part2(input: List<String>): Int = input.chunked(3).mapNotNull { rucksacks ->
-            rucksacks[0].toList().intersect(rucksacks[1].toSet()).intersect(rucksacks[2].toSet()).firstOrNull()
+            rucksacks[0].toSet().intersect(rucksacks[1].toSet()).intersect(rucksacks[2].toSet()).firstOrNull()
         }.sumOf { badge ->
             badge.toPriority()
         }
